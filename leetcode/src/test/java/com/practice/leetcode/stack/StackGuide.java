@@ -197,11 +197,11 @@ public class StackGuide {
 
       while (!stack.isEmpty() && heights[stack.peek()] > currentHeight) {
         int height = heights[stack.pop()];
-        int width = stack.isEmpty() ? i : i - stack.peek() - 1;
+        int width = stack.isEmpty() ? i : (i - 1) - (stack.peek() + 1) + 1 ;
         maxArea = Math.max(maxArea, height * width);
       }
 
-      stack.push(i);
+      stack.push(i);  
     }
 
     return maxArea;

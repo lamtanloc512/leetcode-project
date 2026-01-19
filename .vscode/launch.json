@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "scala",
+      "request": "launch",
+      "name": "PaymentProcessorDemo",
+      "mainClass": "com.practice.refactoring.solutions.PaymentProcessorDemo",
+      "buildTarget": "file:/home/ethan/Applications/leetcode-project/refactoring/?id=refactoring",
+      "args": [],
+      "jvmOptions": [],
+      "env": {}
+    }
+  ]
+}

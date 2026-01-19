@@ -92,7 +92,8 @@ public class SystemDesignEstimationGuide {
    */
   public static class QPSCalculator {
 
-    public static double calculateQPS(long dailyActiveUsers,
+    public static double calculateQPS(
+        long dailyActiveUsers,
         double actionsPerUser,
         int peakMultiplier) {
       double secondsPerDay = 86400;

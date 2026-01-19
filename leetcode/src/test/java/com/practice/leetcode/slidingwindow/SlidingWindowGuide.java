@@ -32,16 +32,16 @@ package com.practice.leetcode.slidingwindow;
  * └─────────────────────────────────────────────────────────────────────────────┘
  *
  * ┌─────────────────────────────────────────────────────────────────────────────┐
- * │ LOẠI 2: VARIABLE SIZE (Kích thước thay đổi) │
- * │ │
- * │ Đặc điểm: │
- * │ - Window size thay đổi dựa trên điều kiện │
- * │ - Right luôn mở rộng, left thu hẹp khi cần │
- * │ │
- * │ Bài toán điển hình: │
- * │ - Minimum Size Subarray Sum (tổng >= target, tìm độ dài nhỏ nhất) │
- * │ - Longest Substring Without Repeating Characters │
- * │ - Fruit Into Baskets (tối đa k loại phần tử khác nhau) │
+ * │ LOẠI 2: VARIABLE SIZE (Kích thước thay đổi)                                 │
+ * │                                                                             │
+ * │ Đặc điểm:                                                                   │
+ * │ - Window size thay đổi dựa trên điều kiện                                   │
+ * │ - Right luôn mở rộng, left thu hẹp khi cần                                  │
+ * │                                                                             │
+ * │ Bài toán điển hình:                                                         │
+ * │ - Minimum Size Subarray Sum (tổng >= target, tìm độ dài nhỏ nhất)           │
+ * │ - Longest Substring Without Repeating Characters                            │
+ * │ - Fruit Into Baskets (tối đa k loại phần tử khác nhau)                      │
  * └─────────────────────────────────────────────────────────────────────────────┘
  *
  *
