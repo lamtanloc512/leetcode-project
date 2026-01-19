@@ -10,6 +10,16 @@
       "args": [],
       "jvmOptions": [],
       "env": {}
+    },
+    {
+      "type": "scala",
+      "request": "launch",
+      "name": "KPairsSmallestSums",
+      "mainClass": "com.practice.leetcode.heap.KPairsSmallestSums",
+      "buildTarget": "file:/home/ethan/Applications/leetcode-project/leetcode/?id=leetcode-test",
+      "args": [],
+      "jvmOptions": [],
+      "env": {}
     }
   ]
 }
