@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "DesignTinyURL",
+      "request": "launch",
+      "mainClass": "com.practice.leetcode.systemdesign.DesignTinyURL",
+      "projectName": "leetcode"
+    },
+    {
       "type": "scala",
       "request": "launch",
       "name": "PaymentProcessorDemo",
