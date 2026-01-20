@@ -7,25 +7,25 @@ import java.util.Queue;
 
 /**
  * ╔═══════════════════════════════════════════════════════════════════════════╗
- * ║ BINARY TREE TECHNIQUE GUIDE ║
- * ║ (Kỹ thuật Cây Nhị Phân) ║
+ * ║ BINARY TREE TECHNIQUE GUIDE                                               ║
+ * ║ (Kỹ thuật Cây Nhị Phân)                                                   ║
  * ╚═══════════════════════════════════════════════════════════════════════════╝
  *
  * ┌─────────────────────────────────────────────────────────────────────────────┐
- * │ CẤU TRÚC CƠ BẢN - TreeNode │
- * │                            │
- * │ class TreeNode {           │
- * │    int val;                │ 
- * │    TreeNode left;          │
- * │    TreeNode right;         │
- * │ }                          │
- * │                            │
- * │ Visualize:                 │
- * │ 1 ← root                   │
- * │ / \                        │
- * │ 2 3 ← level 1              │
- * │ / \ \                      │
- * │ 4 5 6 ← level 2 (leaves)   │
+ * │ CẤU TRÚC CƠ BẢN - TreeNode                                                  │
+ * │                                                                             │
+ * │ class TreeNode {                                                            │
+ * │    int val;                                                                 │ 
+ * │    TreeNode left;                                                           │
+ * │    TreeNode right;                                                          │
+ * │ }                                                                           │
+ * │                                                                             │
+ * │ Visualize:                                                                  │
+ * │ 1 ← root                                                                    │
+ * │ / \                                                                         │
+ * │ 2 3 ← level 1                                                               │
+ * │ / \ \                                                                       │
+ * │ 4 5 6 ← level 2 (leaves)                                                    │
  * └─────────────────────────────────────────────────────────────────────────────┘
  *
  *
@@ -34,15 +34,15 @@ import java.util.Queue;
  * ═══════════════════════════════════════════════════════════════════════════════
  *
  * ┌─────────────────────────────────────────────────────────────────────────────┐
- * │ 1. DFS (Depth-First Search) - Duyệt theo chiều sâu │
- * │ - Đi sâu nhất có thể trước khi quay lại │
- * │ - Dùng RECURSION hoặc STACK │
- * │ - 3 thứ tự: Preorder, Inorder, Postorder │
- * │ │
- * │ 2. BFS (Breadth-First Search) - Duyệt theo chiều rộng │
- * │ - Duyệt từng level từ trên xuống │
- * │ - Dùng QUEUE │
- * │ - Level Order Traversal │
+ * │ 1. DFS (Depth-First Search) - Duyệt theo chiều sâu                          │
+ * │ - Đi sâu nhất có thể trước khi quay lại                                     │
+ * │ - Dùng RECURSION hoặc STACK                                                 │
+ * │ - 3 thứ tự: Preorder, Inorder, Postorder                                    │
+ * │                                                                             │
+ * │ 2. BFS (Breadth-First Search) - Duyệt theo chiều rộng                       │
+ * │ - Duyệt từng level từ trên xuống                                            │
+ * │ - Dùng QUEUE                                                                │
+ * │ - Level Order Traversal                                                     │
  * └─────────────────────────────────────────────────────────────────────────────┘
  */
 public class BinaryTreeGuide {
