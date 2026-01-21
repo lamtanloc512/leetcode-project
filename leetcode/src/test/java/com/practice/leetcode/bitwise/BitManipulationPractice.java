@@ -238,6 +238,8 @@ public class BitManipulationPractice {
    */
   public int reverseBits(int n) {
     int result = 0;
+    // Lưu ý: Bit index đếm từ PHẢI sang TRÁI (0 là bit cuối cùng bên phải - LSB)
+    // i=0: Lấy bit ở vị trí 0 (Phải), đặt vào vị trí 31 (Trái - MSB)
     for (int i = 0; i < 32; i++) {
       // Bước 1: Lấy bit thứ i của n
       int bit = (n >> i) & 1;
