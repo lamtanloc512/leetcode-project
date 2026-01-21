@@ -3,6 +3,10 @@ package com.practice.leetcode.bitwise;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * ╔═══════════════════════════════════════════════════════════════════════════╗
  * ║          BIT MANIPULATION PRACTICE - EASY TO MEDIUM                       ║
@@ -151,6 +155,9 @@ public class BitManipulationPractice {
     assertFalse(isPowerOfTwo(3));
     assertFalse(isPowerOfTwo(0));
     assertFalse(isPowerOfTwo(-2));
+
+    System.out.println(Integer.toBinaryString(19));
+    System.out.println(Integer.toBinaryString(20));
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -362,14 +369,14 @@ public class BitManipulationPractice {
    * │   mask = 7 = 111 → [1, 2, 3]    (chọn tất cả)                               │
    * └─────────────────────────────────────────────────────────────────────────────┘
    */
-  public java.util.List<java.util.List<Integer>> subsets(int[] nums) {
-    java.util.List<java.util.List<Integer>> result = new java.util.ArrayList<>();
+  public List<List<Integer>> subsets(int[] nums) {
+    List<List<Integer>> result = new ArrayList<>();
     int n = nums.length;
     int totalSubsets = 1 << n;  // 2^n
 
     // Duyệt từ 0 đến 2^n - 1
     for (int mask = 0; mask < totalSubsets; mask++) {
-      java.util.List<Integer> subset = new java.util.ArrayList<>();
+      List<Integer> subset = new ArrayList<>();
 
       // Check từng bit của mask
       for (int i = 0; i < n; i++) {
@@ -387,7 +394,7 @@ public class BitManipulationPractice {
 
   @Test
   void testSubsets() {
-    java.util.List<java.util.List<Integer>> result = subsets(new int[]{1, 2, 3});
+    List<List<Integer>> result = subsets(new int[]{1, 2, 3});
     assertEquals(8, result.size());  // 2^3 = 8 subsets
   }
 
@@ -453,11 +460,11 @@ public class BitManipulationPractice {
   @Test
   void testSingleNumberIII() {
     int[] result = singleNumberIII(new int[]{1, 2, 1, 3, 2, 5});
-    java.util.Arrays.sort(result);
+    Arrays.sort(result);
     assertArrayEquals(new int[]{3, 5}, result);
 
     result = singleNumberIII(new int[]{0, 1});
-    java.util.Arrays.sort(result);
+    Arrays.sort(result);
     assertArrayEquals(new int[]{0, 1}, result);
   }
 
@@ -518,5 +525,261 @@ public class BitManipulationPractice {
     assertEquals(5, getSum(2, 3));
     assertEquals(8, getSum(5, 3));
     assertEquals(0, getSum(-1, 1));
+  }
+  // ═══════════════════════════════════════════════════════════════════════════
+  // #10. LC 3315 - Construct the Minimum Bitwise Array II (Medium)
+  // ═══════════════════════════════════════════════════════════════════════════
+  /**
+   * ┌─────────────────────────────────────────────────────────────────────────────┐
+   * │ ĐỀ BÀI:                                                                     │
+   * │ Cho mảng nums chứa các số nguyên tố.                                        │
+   * │ Tìm mảng ans sao cho ans[i] OR (ans[i] + 1) == nums[i].                     │
+   * │ ans[i] phải nhỏ nhất có thể. Nếu không tìm được, ans[i] = -1.               │
+   * ├─────────────────────────────────────────────────────────────────────────────┤
+   * │                                                                             │
+   * │ PHÂN TÍCH:                                                                  │
+   * │ x | (x + 1) luôn có dạng ...011...1 OR ...100...0 = ...111...1              │
+   * │ (Tức là bit 0 đầu tiên từ phải sang của x sẽ biến thành 1, và các bit 1     │
+   * │ phía sau nó giữ nguyên).                                                    │
+   * │                                                                             │
+   * │ Suy ra: nums[i] phải là kết quả của việc "lấp đầy" chuỗi 1 liên tiếp        │
+   * │ tính từ bit thấp nhất.                                                      │
+   * │                                                                             │
+   * │ Gọi L là độ dài chuỗi bit 1 liên tiếp ở cuối của nums[i].                   │
+   * │ (Ví dụ: 7 = 111 → L=3, 13 = 1101 → L=1).                                    │
+   * │                                                                             │
+   * │ Để x nhỏ nhất, ta cần giữ lại nhiều bit cao nhất có thể của nums[i],        │
+   * │ và xóa đi 1 bit trong chuỗi L bit 1 cuối cùng đó.                           │
+   * │ Để x min, ta xóa bit CAO NHẤT trong chuỗi L bit 1 này (bit thứ L-1).        │
+   * │                                                                             │
+   * │ CÔNG THỨC:                                                                  │
+   * │ Nếu nums[i] = 2 (10) → L=0 (trailing zeros, thực ra là tận cùng 0) → -1     │
+   * │ (Vì primes trừ 2 ra đều lẻ, nên tận cùng luôn là 1).                        │
+   * │                                                                             │
+   * │ Với nums[i] lẻ: tìm bit 0 đầu tiên từ phải sang (ở vị trí L).               │
+   * │ Bit cần xóa là L-1.                                                         │
+   * │ ans[i] = nums[i] ^ (1 << (L-1))                                             │
+   * │                                                                             │
+   * │ THUẬT TOÁN:                                                                 │
+   * │ 1. Nếu nu == 2 → ans = -1                                                   │
+   * │ 2. Tìm bit 0 đầu tiên của nums[i] (tương đương bit 1 thấp nhất của ~nums[i])│
+   * │    Hoặc đơn giản: tìm lowest set bit của (nums[i] + 1).                     │
+   * │    Vd: 7 (0111) + 1 = 8 (1000) → bit 1 ở pos 3 (L=3).                       │
+   * │ 3. ans = nums[i] - (bit >> 1)                                               │
+   * │                                                                             │
+   * │ VD: nums[i] = 7 (111). num+1 = 8 (1000). bit=8. sub=4. ans = 3 (011).       │
+   * │     3 | 4 = 7. Correct.                                                     │
+   * └─────────────────────────────────────────────────────────────────────────────┘
+   */
+  public int[] minBitwiseArray(List<Integer> nums) {
+    int n = nums.size();
+    int[] ans = new int[n];
+
+    for (int i = 0; i < n; i++) {
+      int val = nums.get(i);
+      if (val == 2) {
+        ans[i] = -1;
+      } else {
+        // Tìm bit 1 thấp nhất của (val + 1)
+        // val là số lẻ (prime > 2), nên val luôn tận cùng là 1.
+        // val + 1 sẽ tận cùng là 0...0
+        // (val + 1) & -(val + 1) sẽ lấy ra bit 1 thấp nhất này.
+        // Bit này chính là 1 << L.
+        // Ta cần trừ đi 1 << (L-1), tức là bit này dịch phải 1.
+
+        int lowestBitOfNext = (val + 1) & -(val + 1);
+        ans[i] = val - (lowestBitOfNext >> 1);
+      }
+    }
+    return ans;
+  }
+
+  @Test
+  void testMinBitwiseArray() {
+    // Test case 1: [2, 3, 5, 7]
+    // 2 -> -1
+    // 3 (011) -> L=2, sub 2^(2-1)=2. 3-2=1. Check 1|2=3. Correct.
+    // 5 (101) -> L=1, sub 2^(1-1)=1. 5-1=4. Check 4|5=5. Correct.
+    // 7 (111) -> L=3, sub 2^(3-1)=4. 7-4=3. Check 3|4=7. Correct.
+    
+    int[] expected = {-1, 1, 4, 3};
+    int[] result = minBitwiseArray(Arrays.asList(2, 3, 5, 7));
+    assertArrayEquals(expected, result);
+
+    // Test case from description analysis: 13 (1101)
+    // 13 -> L=1. ans = 12. 12|13=13.
+    assertArrayEquals(new int[]{12}, minBitwiseArray(Arrays.asList(13)));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // #11. LC 29 - DIVIDE TWO INTEGERS (Medium)
+  // ═══════════════════════════════════════════════════════════════════════════
+  /**
+   * ┌─────────────────────────────────────────────────────────────────────────────┐
+   * │ ĐỀ BÀI:                                                                     │
+   * │ Chia 2 số nguyên mà KHÔNG dùng phép nhân (*), chia (/), hoặc mod (%).       │
+   * │ Trả về thương số (quotient). Truncate toward 0 (8.3 -> 8, -2.7 -> -2).      │
+   * │ Xử lý overflow: [−2^31, 2^31 − 1]. Nếu tràn, trả về MAX_VALUE.              │
+   * ├─────────────────────────────────────────────────────────────────────────────┤
+   * │                                                                             │
+   * │ Ý TƯỞNG CỐT LÕI: Phép chia thực chất là PHÉP TRỪ LẶP LẠI.                   │
+   * │ 10 / 3 = 3 dư 1                                                             │
+   * │ -> 10 - 3 = 7                                                               │
+   * │ -> 7 - 3 = 4                                                                │
+   * │ -> 4 - 3 = 1  (nhỏ hơn 3, dừng)                                             │
+   * │ -> Trừ được 3 lần => kết quả là 3.                                          │
+   * │                                                                             │
+   * │ Vấn đề: Nếu 2^31 / 1 mà trừ từng cái 1 thì TLE (Time Limit Exceeded).       │
+   * │ Giải pháp: TRỪ THEO CẤP SỐ NHÂN 2 (Binary Search / Bitwise Shift)           │
+   * │                                                                             │
+   * │ CƠ CHẾ "LŨY THỪA 2":                                                        │
+   * │ Thay vì trừ divisor (3), ta thử trừ 3*2^10, 3*2^9, ..., 3*2^0.              │
+   * │                                                                             │
+   * │ VD: 100 / 3                                                                 │
+   * │  3 * 2^0 = 3                                                                │
+   * │  3 * 2^1 = 6                                                                │
+   * │  3 * 2^2 = 12                                                               │
+   * │  3 * 2^3 = 24                                                               │
+   * │  3 * 2^4 = 48                                                               │
+   * │  3 * 2^5 = 96  (nhỏ hơn 100)                                                │
+   * │  3 * 2^6 = 192 (lớn hơn 100) -> Dừng tăng.                                  │
+   * │                                                                             │
+   * │ Bước 1: 100 - (3 * 2^5) = 100 - 96 = 4.  (Kết quả += 2^5 = 32)              │
+   * │ Bước 2: 4 (còn lại) / 3.                                                    │
+   * │         3 * 2^0 = 3 (nhỏ hơn 4).                                            │
+   * │         4 - 3 = 1.                       (Kết quả += 2^0 = 1)               │
+   * │ Tổng: 32 + 1 = 33.                                                          │
+   * │                                                                             │
+   * │ CÁCH LÀM:                                                                   │
+   * │ 1. Xử lý dấu: quotient dương nếu dividend và divisor cùng dấu.                │
+   * │ 2. Chuyển dividend và divisor sang số dương (nên dùng long để tránh tràn).    │
+   * │ 3. Dùng bit shift (<<) để nhân 2.                                           │
+   * │                                                                             │
+   * └─────────────────────────────────────────────────────────────────────────────┘
+   */
+  public int divide(int dividend, int divisor) {
+    // 1. Xử lý trường hợp đặc biệt: Overflow
+    // Chỉ có 1 trường hợp tràn số: MIN_VALUE / -1 = MAX_VALUE + 1 (quá int)
+    if (dividend == Integer.MIN_VALUE && divisor == -1) {
+      return Integer.MAX_VALUE;
+    }
+
+    // 2. Xác định dấu của kết quả
+    // Kết quả âm nếu 2 số trái dấu (XOR < 0)
+    boolean negative = (dividend < 0) ^ (divisor < 0);
+
+    // 3. Chuyển sang giá trị tuyệt đối (dùng long để tránh tràn khi abs MIN_VALUE)
+    long absDividend = Math.abs((long) dividend);
+    long absDivisor = Math.abs((long) divisor);
+
+    int result = 0;
+
+    // 4. Lặp để trừ dần
+    // Trong khi số bị chia vẫn lớn hơn số chia
+    while (absDividend >= absDivisor) {
+      long tempDivisor = absDivisor;
+      long multiple = 1;
+
+      // Tìm bội số lớn nhất của divisor mà <= dividend
+      // (nhân đôi divisor liên tục)
+      // tempDivisor << 1 chính là tempDivisor * 2
+      while (absDividend >= (tempDivisor << 1)) {
+        tempDivisor <<= 1;
+        multiple <<= 1;
+      }
+
+      // Trừ phần đó ra khỏi số bị chia
+      absDividend -= tempDivisor;
+      // Cộng số lần trừ vào kết quả
+      result += multiple;
+    }
+
+    // 5. Trả về kết quả kèm dấu
+    return negative ? -result : result;
+  }
+
+  @Test
+  void testDivide() {
+    assertEquals(3, divide(10, 3));
+    assertEquals(-2, divide(7, -3));
+    assertEquals(0, divide(0, 1));
+    assertEquals(1, divide(1, 1));
+    assertEquals(Integer.MAX_VALUE, divide(Integer.MIN_VALUE, -1)); // Overflow case
+    assertEquals(Integer.MIN_VALUE, divide(Integer.MIN_VALUE, 1));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // #12. LC 67 - ADD BINARY (Easy)
+  // ═══════════════════════════════════════════════════════════════════════════
+  /**
+   * ┌─────────────────────────────────────────────────────────────────────────────┐
+   * │ ĐỀ BÀI:                                                                     │
+   * │ Cộng 2 chuỗi nhị phân (binary strings).                                     │
+   * │ Input: a = "11", b = "1" -> Output: "100"                                   │
+   * ├─────────────────────────────────────────────────────────────────────────────┤
+   * │                                                                             │
+   * │ Ý TƯỞNG: Mô phỏng phép cộng tiểu học (cộng từng cột từ phải sang trái).     │
+   * │                                                                             │
+   * │    1 1   (a)                                                                │
+   * │ +    1   (b)                                                                │
+   * │ ──────                                                                      │
+   * │                                                                             │
+   * │ B1: Cột ngoài cùng: 1 + 1 = 2 -> viết 0 nhớ 1.                              │
+   * │ B2: Cột tiếp theo:  1 + (nhớ 1) = 2 -> viết 0 nhớ 1.                        │
+   * │ B3: Hết số -> Hạ 1 xuống.                                                   │
+   * │ -> Kết quả: 100.                                                            │
+   * │                                                                             │
+   * │ THUẬT TOÁN (Two Pointers):                                                  │
+   * │ 1. Dùng i và j trỏ vào cuối chuỗi a và b.                                   │
+   * │ 2. Dùng biến carry để lưu số nhớ.                                           │
+   * │ 3. Lặp khi (i >= 0 HOẶC j >= 0 HOẶC carry > 0).                             │
+   * │    - sum = carry                                                            │
+   * │    - Nếu còn i: sum += a[i], i--                                            │
+   * │    - Nếu còn j: sum += b[j], j--                                            │
+   * │    - carry mới = sum / 2                                                    │
+   * │    - digit viết vào = sum % 2                                               │
+   * │ 4. Kết quả bị ngược -> Đảo ngược lại (StringBuilder.reverse).               │
+   * └─────────────────────────────────────────────────────────────────────────────┘
+   */
+  public String addBinary(String a, String b) {
+    StringBuilder sb = new StringBuilder();
+    int i = a.length() - 1;
+    int j = b.length() - 1;
+    int carry = 0;
+
+    // Lặp đến khi hết cả 2 chuỗi VÀ hết số nhớ
+    while (i >= 0 || j >= 0 || carry > 0) {
+      int sum = carry;
+
+      // Cộng bit từ chuỗi a (nếu còn)
+      if (i >= 0) {
+        sum += a.charAt(i) - '0'; // Chuyển char '0'/'1' sang int 0/1
+        i--;
+      }
+
+      // Cộng bit từ chuỗi b (nếu còn)
+      if (j >= 0) {
+        sum += b.charAt(j) - '0';
+        j--;
+      }
+
+      // sum có thể là:
+      // 0 (0+0+0) -> viết 0, nhớ 0
+      // 1 (0+1+0) -> viết 1, nhớ 0
+      // 2 (1+1+0) -> viết 0, nhớ 1
+      // 3 (1+1+1) -> viết 1, nhớ 1
+
+      sb.append(sum % 2); // Viết phần đơn vị
+      carry = sum / 2;    // Tính phần nhớ
+    }
+
+    return sb.reverse().toString();
+  }
+
+  @Test
+  void testAddBinary() {
+    assertEquals("100", addBinary("11", "1"));
+    assertEquals("10101", addBinary("1010", "1011"));
+    assertEquals("0", addBinary("0", "0"));
   }
 }

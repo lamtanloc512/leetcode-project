@@ -293,22 +293,65 @@ public class TwoPointersGuide {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // PATTERN 5: REVERSE ITERATION / CARRY (Arithmetic Simulation)
+  // ═══════════════════════════════════════════════════════════════════════════
+  /**
+   * Dùng cho:
+   * - Add Strings / Binary
+   * - Plus One
+   * - Add to Array-Form of Integer
+   * - Multiply Strings (phần cộng dồn)
+   *
+   * Template:
+   *
+   * int i = len1 - 1, j = len2 - 1, carry = 0;
+   * while (i >= 0 || j >= 0 || carry > 0) {
+   *     int sum = carry;
+   *     if (i >= 0) sum += num1[i--];
+   *     if (j >= 0) sum += num2[j--];
+   *
+   *     result.append(sum % 10);
+   *     carry = sum / 10;
+   * }
+   * return result.reverse();
+   */
+
+  // Add Strings (Minh họa template)
+  String addStrings(String num1, String num2) {
+    StringBuilder sb = new StringBuilder();
+    int i = num1.length() - 1, j = num2.length() - 1, carry = 0;
+
+    while (i >= 0 || j >= 0 || carry > 0) {
+      int sum = carry;
+      if (i >= 0) sum += num1.charAt(i--) - '0';
+      if (j >= 0) sum += num2.charAt(j--) - '0';
+
+      sb.append(sum % 10);
+      carry = sum / 10;
+    }
+
+    return sb.reverse().toString();
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // BẢNG CHỌN PATTERN
   // ═══════════════════════════════════════════════════════════════════════════
   /**
    * ┌──────────────────────────────────────────────────────────────────────────┐
-   * │ Bài toán │ Pattern │ Điều kiện │
+   * │ Bài toán                       │ Pattern          │ Điều kiện            │
    * ├──────────────────────────────────────────────────────────────────────────┤
-   * │ Tìm cặp trong sorted array │ Opposite │ Array sorted │
-   * │ Palindrome check │ Opposite │ So sánh 2 đầu │
-   * │ 3Sum, 4Sum │ Fix + Opposite │ Sort first │
-   * │ Max area/water │ Opposite │ Maximize width │
+   * │ Tìm cặp trong sorted array     │ Opposite         │ Array sorted         │
+   * │ Palindrome check               │ Opposite         │ So sánh 2 đầu        │
+   * │ 3Sum, 4Sum                     │ Fix + Opposite   │ Sort first           │
+   * │ Max area/water                 │ Opposite         │ Maximize width       │
    * ├──────────────────────────────────────────────────────────────────────────┤
-   * │ Remove duplicates │ Same (slow/fast) │ In-place modify │
-   * │ Move/Remove elements │ Same (slow/fast) │ Partition │
+   * │ Remove duplicates              │ Same (slow/fast) │ In-place modify      │
+   * │ Move/Remove elements           │ Same (slow/fast) │ Partition            │
    * ├──────────────────────────────────────────────────────────────────────────┤
-   * │ Merge sorted arrays │ Two Arrays │ Both sorted │
-   * │ Intersection/Union │ Two Arrays │ Sort first │
+   * │ Merge sorted arrays            │ Two Arrays       │ Both sorted          │
+   * │ Intersection/Union             │ Two Arrays       │ Sort first           │
+   * ├──────────────────────────────────────────────────────────────────────────┤
+   * │ Add Strings / Binary           │ Reverse + Carry  │ Math Simulation      │
    * └──────────────────────────────────────────────────────────────────────────┘
    *
    *

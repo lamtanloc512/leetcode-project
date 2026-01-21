@@ -117,37 +117,38 @@ public class LC3314_ConstructMinBitwiseArray {
 
   /**
    * Tìm x nhỏ nhất sao cho x OR (x+1) = target
+   *
+   * ÁP DỤNG CHIẾN THUẬT BITWISE (O(1)):
+   * 1. Kiểm tra tính chẵn lẻ:
+   *    x | (x+1) luôn có bit cuối là 1 (vì hoặc x lẻ hoặc x+1 lẻ).
+   *    -> Nếu target chẵn => Không bao giờ tìm được x => Return -1.
+   *
+   * 2. Tìm bit cần xóa:
+   *    target có dạng ...011...1 (một chuỗi 1 liên tiếp ở cuối).
+   *    x sẽ giống target nhưng tắt bit 1 CAO NHẤT trong chuỗi đó.
+   *
+   *    Công thức: k = (target + 1) & -(target + 1)
+   *    (Lấy bit 1 thấp nhất của target + 1, chính là vị trí sau chuỗi 1 của target)
+   *
+   *    Bit cần tắt = k >> 1.
+   *    x = target - (k >> 1).
    */
   private int findMinX(int target) {
-    // Bước 1: Tìm vị trí bit 0 thấp nhất
-    int lowestZeroPos = findLowestZeroBit(target);
-
-    // Bước 2: Nếu bit 0 ở vị trí 0 (LSB = 0) → không thể
-    // Vì x OR (x+1) luôn có bit 0 = 1 (hoặc x lẻ, hoặc x+1 lẻ)
-    if (lowestZeroPos == 0) {
+    if ((target & 1) == 0) { // Số chẵn -> Không có nghiệm
       return -1;
     }
 
-    // Bước 3: Clear bit tại vị trí (lowestZeroPos - 1)
-    // Đây là bit cao nhất trong chuỗi trailing 1s
-    int bitToClear = lowestZeroPos - 1;
-    return target & ~(1 << bitToClear);
-  }
+    // target + 1 sẽ làm chuỗi 1 cuối cùng biến thành 0 và bật bit 0 liền trước.
+    // VD: target = 7 (0111) -> target+1 = 8 (1000)
+    // Lấy bit đó ra:
+    int lowestSetBitOfNext = (target + 1) & -(target + 1);
 
-  /**
-   * Tìm vị trí bit 0 thấp nhất (từ phải sang)
-   *
-   * VD: 7 = 111 → trailing 1s, bit 0 đầu tiên ở vị trí 3 (ngoài số)
-   *     11 = 1011 → bit0=1, bit1=1, bit2=0 → vị trí 2
-   *     2 = 10 → bit0=0 → vị trí 0
-   */
-  private int findLowestZeroBit(int n) {
-    int pos = 0;
-    while ((n & 1) == 1) {  // Trong khi bit hiện tại = 1
-      n >>= 1;              // Dịch phải
-      pos++;                // Tăng vị trí
-    }
-    return pos;  // Vị trí bit 0 đầu tiên
+    // Dịch phải 1 để về lại vị trí bit 1 cao nhất của target cần xóa
+    // VD: 8 (1000) >> 1 = 4 (0100)
+    int bitToClear = lowestSetBitOfNext >> 1;
+
+    // Trừ đi để tắt bit đó
+    return target - bitToClear;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
