@@ -257,6 +257,42 @@ public class BitManipulationPractice {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // CÁCH 2: DÙNG JAVA BUILT-IN (Ngắn nhất)
+  // ═══════════════════════════════════════════════════════════════════════════
+  public int reverseBitsJava(int n) {
+    return Integer.reverse(n);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CÁCH 3: DIVIDE AND CONQUER (Bit Manipulation Magic - Không dùng loop)
+  // ═══════════════════════════════════════════════════════════════════════════
+  public int reverseBitsOpt(int n) {
+    // 1. Swap adjacent bits (đổi chỗ 2 bit liền kề)
+    // 0x55555555 = 01010101... (mask lẻ)
+    // 0xAAAAAAAA = 10101010... (mask chẵn)
+    n = ((n & 0x55555555) << 1) | ((n >>> 1) & 0x55555555);
+
+    // 2. Swap 2-bit pairs (đổi chỗ cặp 2 bit)
+    // 0x33333333 = 00110011...
+    n = ((n & 0x33333333) << 2) | ((n >>> 2) & 0x33333333);
+
+    // 3. Swap nibbles (đổi chỗ cặp 4 bit)
+    // 0x0F0F0F0F = 00001111...
+    n = ((n & 0x0F0F0F0F) << 4) | ((n >>> 4) & 0x0F0F0F0F);
+
+    // 4. Swap bytes (đổi chỗ cặp 8 bit)
+    // 0x00FF00FF = 0000000011111111...
+    n = ((n & 0x00FF00FF) << 8) | ((n >>> 8) & 0x00FF00FF);
+
+    // 5. Swap halves (đổi chỗ 16 bit đầu và cuối)
+    // 0x0000FFFF (thực ra chỉ cần dịch là đủ vì int 32 bit)
+    n = (n << 16) | (n >>> 16);
+
+    return n;
+  }
+
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // #6. LC 338 - COUNTING BITS (Easy)
   // ═══════════════════════════════════════════════════════════════════════════
   /**

@@ -6,10 +6,11 @@ import java.util.List;
 
 /**
  * ╔═══════════════════════════════════════════════════════════════════════════╗
- * ║ TWO POINTERS TEMPLATES (Skeletons)                                        ║
+ * ║ TWO POINTERS TEMPLATES (Skeletons)                                        ║ 
  * ╚═══════════════════════════════════════════════════════════════════════════╝
  * <p>
- * File này chứa các bộ khung code (skeleton) chuẩn cho các dạng bài Two Pointers.
+ * File này chứa các bộ khung code (skeleton) chuẩn cho các dạng bài Two
+ * Pointers.
  * Bạn có thể copy method này và điền logic cụ thể vào chỗ "TODO".
  */
 public class TwoPointersTemplates {
@@ -17,9 +18,10 @@ public class TwoPointersTemplates {
   // ═══════════════════════════════════════════════════════════════════════════
   // PATTERN 1: OPPOSITE DIRECTION (Ngược chiều)
   // ═══════════════════════════════════════════════════════════════════════════
-  // Use for: Two Sum (sorted), Palindrome, Reverse String, Container With Most Water
-@SuppressWarnings("unused")
-public void solveOppositeDirection(int[] nums) {
+  // Use for: Two Sum (sorted), Palindrome, Reverse String, Container With Most
+  // Water
+  @SuppressWarnings("unused")
+  public void solveOppositeDirection(int[] nums) {
     int left = 0;
     int right = nums.length - 1;
 
@@ -48,7 +50,7 @@ public void solveOppositeDirection(int[] nums) {
 
     for (int fast = 0; fast < nums.length; fast++) {
       // TODO: Điều kiện để giữ lại phần tử
-      boolean shouldKeep = (nums[fast] != -1); 
+      boolean shouldKeep = (nums[fast] != -1);
 
       if (shouldKeep) {
         // Swap hoặc Gán
@@ -84,8 +86,10 @@ public void solveOppositeDirection(int[] nums) {
     }
 
     // Xử lý phần còn lại (nếu cần)
-    while (i < arr1.length) result.add(arr1[i++]);
-    while (j < arr2.length) result.add(arr2[j++]);
+    while (i < arr1.length)
+      result.add(arr1[i++]);
+    while (j < arr2.length)
+      result.add(arr2[j++]);
 
     return result;
   }
@@ -100,7 +104,8 @@ public void solveOppositeDirection(int[] nums) {
 
     for (int i = 0; i < nums.length - 2; i++) {
       // Skip duplicates cho số thứ 1
-      if (i > 0 && nums[i] == nums[i - 1]) continue;
+      if (i > 0 && nums[i] == nums[i - 1])
+        continue;
 
       int left = i + 1, right = nums.length - 1;
       while (left < right) {
@@ -108,10 +113,12 @@ public void solveOppositeDirection(int[] nums) {
 
         if (sum == 0) { // TODO: Target logic
           res.add(Arrays.asList(nums[i], nums[left], nums[right]));
-          
+
           // Skip duplicates cho 2 pointers còn lại
-          while (left < right && nums[left] == nums[left + 1]) left++;
-          while (left < right && nums[right] == nums[right - 1]) right--;
+          while (left < right && nums[left] == nums[left + 1])
+            left++;
+          while (left < right && nums[right] == nums[right - 1])
+            right--;
           left++;
           right--;
         } else if (sum < 0) {
@@ -137,19 +144,19 @@ public void solveOppositeDirection(int[] nums) {
     // Lặp khi còn số hoặc còn nhớ
     while (i >= 0 || j >= 0 || carry > 0) {
       int sum = carry;
-      
+
       if (i >= 0) {
         sum += num1.charAt(i) - '0'; // Convert char -> int
         i--;
       }
-      
+
       if (j >= 0) {
         sum += num2.charAt(j) - '0'; // Convert char -> int
         j--;
       }
 
       sb.append(sum % 10); // Lấy phần đơn vị
-      carry = sum / 10;    // Tính nhớ
+      carry = sum / 10; // Tính nhớ
     }
 
     return sb.reverse().toString(); // Đảo ngược kết quả
