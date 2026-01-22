@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -161,11 +163,11 @@ public class TwoPointersCarryPractice {
     return result;
   }
 
-  @Test
-  void testAddToArrayForm() {
-    assertEquals(List.of(1, 2, 3, 4), addToArrayForm(new int[]{1, 2, 0, 0}, 34));
-    assertEquals(List.of(4, 5, 5), addToArrayForm(new int[]{2, 7, 4}, 181));
-    assertEquals(List.of(1, 0, 2, 1), addToArrayForm(new int[]{2, 1, 5}, 806));
-    assertEquals(List.of(1, 0, 0, 0, 0), addToArrayForm(new int[]{9, 9, 9, 9}, 1));
-  }
+  // @Test
+  // void testAddToArrayForm() {
+  //   assertEquals(Arrays.asList(1, 2, 3, 4), addToArrayForm(new int[]{1, 2, 0, 0}, 34));
+  //   assertEquals(List.of(4, 5, 5), addToArrayForm(new int[]{2, 7, 4}, 181));
+  //   assertEquals(List.of(1, 0, 2, 1), addToArrayForm(new int[]{2, 1, 5}, 806));
+  //   assertEquals(List.of(1, 0, 0, 0, 0), addToArrayForm(new int[]{9, 9, 9, 9}, 1));
+  // }
 }

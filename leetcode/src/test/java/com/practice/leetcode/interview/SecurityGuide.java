@@ -4,7 +4,7 @@ package com.practice.leetcode.interview;
  * ╔═══════════════════════════════════════════════════════════════════════════╗
  * ║              SECURITY INTERVIEW GUIDE                                     ║
  * ╠═══════════════════════════════════════════════════════════════════════════╣
- * ║ OWASP Top 10, Security Best Practices, Common Vulnerabilities            ║
+ * ║ OWASP Top 10, Security Best Practices, Common Vulnerabilities             ║
  * ║ Dành cho Senior Backend Developer Interview                               ║
  * ╚═══════════════════════════════════════════════════════════════════════════╝
  */
@@ -18,16 +18,16 @@ public class SecurityGuide {
    * │ OWASP TOP 10 (2021) OVERVIEW                                                │
    * ├─────────────────────────────────────────────────────────────────────────────┤
    * │                                                                             │
-   * │ 1. A01:2021 - Broken Access Control (Kiểm soát truy cập bị lỗi)            │
-   * │ 2. A02:2021 - Cryptographic Failures (Lỗi mã hóa)                          │
-   * │ 3. A03:2021 - Injection (SQL, NoSQL, OS, LDAP...)                          │
-   * │ 4. A04:2021 - Insecure Design (Thiết kế không an toàn)                     │
-   * │ 5. A05:2021 - Security Misconfiguration (Cấu hình sai)                     │
-   * │ 6. A06:2021 - Vulnerable Components (Thư viện có lỗ hổng)                  │
-   * │ 7. A07:2021 - Authentication Failures (Lỗi xác thực)                       │
-   * │ 8. A08:2021 - Data Integrity Failures (Lỗi toàn vẹn dữ liệu)               │
-   * │ 9. A09:2021 - Security Logging Failures (Logging không đủ)                 │
-   * │ 10. A10:2021 - Server-Side Request Forgery (SSRF)                          │
+   * │ 1. A01:2021 - Broken Access Control (Kiểm soát truy cập bị lỗi)             │
+   * │ 2. A02:2021 - Cryptographic Failures (Lỗi mã hóa)                           │
+   * │ 3. A03:2021 - Injection (SQL, NoSQL, OS, LDAP...)                           │
+   * │ 4. A04:2021 - Insecure Design (Thiết kế không an toàn)                      │
+   * │ 5. A05:2021 - Security Misconfiguration (Cấu hình sai)                      │
+   * │ 6. A06:2021 - Vulnerable Components (Thư viện có lỗ hổng)                   │
+   * │ 7. A07:2021 - Authentication Failures (Lỗi xác thực)                        │
+   * │ 8. A08:2021 - Data Integrity Failures (Lỗi toàn vẹn dữ liệu)                │
+   * │ 9. A09:2021 - Security Logging Failures (Logging không đủ)                  │
+   * │ 10. A10:2021 - Server-Side Request Forgery (SSRF)                           │
    * └─────────────────────────────────────────────────────────────────────────────┘
    */
 

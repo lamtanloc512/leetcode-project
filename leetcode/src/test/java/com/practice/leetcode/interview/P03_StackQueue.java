@@ -52,8 +52,10 @@ public class P03_StackQueue {
      */
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
-        Map<Character, Character> pairs = Map.of(')', '(', '}', '{', ']', '[');
-        
+        Map<Character, Character> pairs = new HashMap<>();
+        pairs.put(')', '(');
+        pairs.put('}', '{');
+        pairs.put(']', '[');
         for (char c : s.toCharArray()) {
             if (pairs.containsValue(c)) {
                 // Ngoặc mở
@@ -172,7 +174,8 @@ public class P03_StackQueue {
      */
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
-        Set<String> operators = Set.of("+", "-", "*", "/");
+        Set<String> operators = new HashSet<>();
+        operators.addAll(Arrays.asList("+", "-", "*", "/"));
         Map<String, BiFunction<Integer, Integer, Integer>> map = new HashMap<>();   
         map.put("+", (x, y) -> x + y);
         map.put("-", (x, y) -> x - y);
