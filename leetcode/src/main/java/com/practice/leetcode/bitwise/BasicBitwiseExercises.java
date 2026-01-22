@@ -24,6 +24,8 @@ public class BasicBitwiseExercises {
         System.out.println("\n--- [LEVEL 2] THAO TÁC CƠ BẢN ---");
         testVal("3. Bật bit 1 của 5 (101 -> 111)", setBit(5, 1), 7);
         testVal("4. Tắt bit 1 của 7 (111 -> 101)", clearBit(7, 1), 5);
+        testVal("4b. [BONUS] Tắt bit từ 2 về 0 của 31 (11111 -> 11000)", clearBitsFromItTo0(31, 2), 24);
+        testVal("4c. [BONUS] Tắt bit từ MSB về 2 của 31 (11111 -> 00011)", clearBitsFromMSBToIt(31, 2), 3);
         testVal("5. Đảo bit 0 của 5 (101 -> 100)", toggleBit(5, 0), 4);
 
         // LEVEL 3
@@ -63,6 +65,28 @@ public class BasicBitwiseExercises {
     public static boolean isBitSet(int n, int k) { return (n & (1 << k)) != 0; }
     public static int setBit(int n, int k) { return n | (1 << k); }
     public static int clearBit(int n, int k) { return n & ~(1 << k); }
+
+    /**
+     * [BONUS] Tắt tất cả bit từ i về 0 (Clear bits from i to 0).
+     * Ví dụ: n = 11111 (31), i = 2.
+     * Muốn giữ lại: 11000.
+     * Mask: ~((1 << (i + 1)) - 1)  -> ~(00111) -> 11000
+     */
+    public static int clearBitsFromItTo0(int n, int i) {
+        int mask = ~((1 << (i + 1)) - 1);
+        return n & mask;
+    }
+
+    /**
+     * [BONUS] Tắt tất cả bit từ MSB về i (Clear bits from MSB to i).
+     * Ví dụ: n = 11111 (31), i = 2.
+     * Muốn giữ lại: 00011.
+     * Mask: (1 << i) - 1. -> 00011.
+     */
+    public static int clearBitsFromMSBToIt(int n, int i) {
+        int mask = (1 << i) - 1;
+        return n & mask;
+    }
     public static int toggleBit(int n, int k) { return n ^ (1 << k); }
     public static int removeLastSetBit(int n) { return n & (n - 1); }
     public static int isolateRightmostBit(int n) { return n & (-n); }
