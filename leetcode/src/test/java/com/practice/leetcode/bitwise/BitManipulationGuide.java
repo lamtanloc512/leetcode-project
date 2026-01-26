@@ -37,17 +37,17 @@ public class BitManipulationGuide {
 
         // 2. SET BIT (Bật bit thứ i lên 1)
         // n | (1 << i)
-        int setBitRes = n | (1 << 2); // Bật bit 2 (đang là 0) thành 1 -> 1010 | 0100 = 1110 (14)
+        int setBitRes = n | (1 << 2); // Bật bit 2 (đang là 0) thành 1 → 1010 | 0100 = 1110 (14)
         assertEquals(14, setBitRes);
 
         // 3. CLEAR BIT (Tắt bit thứ i về 0)
         // n & ~(1 << i)
-        int clearBitRes = n & ~(1 << 1); // Tắt bit 1 (đang là 1) -> 1010 & 1101 = 1000 (8)
+        int clearBitRes = n & ~(1 << 1); // Tắt bit 1 (đang là 1) → 1010 & 1101 = 1000 (8)
         assertEquals(8, clearBitRes);
         
         // 4. TOGGLE BIT (Đảo trạng thái bit thứ i)
         // n ^ (1 << i)
-        int toggleBitRes = n ^ (1 << 3); // Đảo bit 3 (đang 1) thành 0 -> 1010 ^ 1000 = 0010 (2)
+        int toggleBitRes = n ^ (1 << 3); // Đảo bit 3 (đang 1) thành 0 → 1010 ^ 1000 = 0010 (2)
         assertEquals(2, toggleBitRes);
         
         // 5. UPDATE BIT (Đặt bit i thành giá trị v - 0 hoặc 1)
@@ -70,17 +70,17 @@ public class BitManipulationGuide {
 
         // 2. CLEAR LOWEST SET BIT (Xóa bit 1 thấp nhất) - Brian Kernighan’s Alg
         // n = n & (n - 1)
-        // Ví dụ: 101000 (40) -> 101000 & 100111 = 100000 (32)
+        // Ví dụ: 101000 (40) → 101000 & 100111 = 100000 (32)
         assertEquals(32, n & (n - 1));
 
         // 3. GET LOWEST SET BIT (Lấy bit 1 thấp nhất)
         // n & -n
         // Giải thích: -n là bù 2 của n (~n + 1). 
-        // 40 (101000) -> -40 (011000) -> 40 & -40 = 001000 (8)
+        // 40 (101000) → -40 (011000) → 40 & -40 = 001000 (8)
         assertEquals(8, n & -n);
 
         // 4. CLEAR ALL BITS FROM MSB TO i (Inclusive)
-        // n & ((1 << i) - 1) -> Modulo 2^i
+        // n & ((1 << i) - 1) → Modulo 2^i
         // Giữ lại các bit từ 0 đến i-1
         int x = 0b11101; // 29
         // Muốn giữ lại 3 bit cuối: & với 0b111 (7)
@@ -254,15 +254,15 @@ public class BitManipulationGuide {
      * - Duyệt từng byte trong mảng.
      * - Nếu `numberOfBytesToProcess == 0`:
      *   - Kiểm tra xem byte này là header của loại mấy bytes?
-     *   - Nếu 0xxxxxxx -> 1-byte char, OK, tiếp tục.
-     *   - Nếu 110xxxxx -> Cần thêm 1 byte (set numberOfBytesToProcess = 1).
-     *   - Nếu 1110xxxx -> Cần thêm 2 byte (set numberOfBytesToProcess = 2).
-     *   - Nếu 11110xxx -> Cần thêm 3 byte (set numberOfBytesToProcess = 3).
-     *   - Khác -> Sai (Invalid header, ví dụ 10xxxxxx hay 11111xxx).
+     *   - Nếu 0xxxxxxx → 1-byte char, OK, tiếp tục.
+     *   - Nếu 110xxxxx → Cần thêm 1 byte (set numberOfBytesToProcess = 1).
+     *   - Nếu 1110xxxx → Cần thêm 2 byte (set numberOfBytesToProcess = 2).
+     *   - Nếu 11110xxx → Cần thêm 3 byte (set numberOfBytesToProcess = 3).
+     *   - Khác → Sai (Invalid header, ví dụ 10xxxxxx hay 11111xxx).
      * - Nếu `numberOfBytesToProcess > 0`:
      *   - Kiểm tra byte hiện tại có phải là continuation byte (10xxxxxx) không?
-     *   - Nếu đúng (byte & 11000000 == 10000000) -> Giảm numberOfBytesToProcess.
-     *   - Nếu sai -> Return `false`.
+     *   - Nếu đúng (byte & 11000000 == 10000000) → Giảm numberOfBytesToProcess.
+     *   - Nếu sai → Return `false`.
      * 
      * BITMASKS QUAN TRỌNG:
      * - 0x80 (10000000): Check bit đầu tiên.
@@ -292,7 +292,7 @@ public class BitManipulationGuide {
                     mask = mask >> 1;
                 }
 
-                // Trường hợp 1 byte: 0xxxxxxx -> count = 0
+                // Trường hợp 1 byte: 0xxxxxxx → count = 0
                 if (numberOfBytesToProcess == 0) {
                     continue;
                 }
@@ -322,7 +322,7 @@ public class BitManipulationGuide {
             }
         }
 
-        // Nếu duyệt hết mà vẫn còn đang chờ byte tiếp theo -> False
+        // Nếu duyệt hết mà vẫn còn đang chờ byte tiếp theo → False
         return numberOfBytesToProcess == 0;
     }
 
@@ -345,19 +345,19 @@ public class BitManipulationGuide {
      * 
      * Phân tích số lẻ dưới dạng nhị phân (...xx):
      * 1. Kết thúc là 01 (n % 4 == 1):
-     *    - n - 1 -> ...00 (chia hết cho 4) -> TỐT
-     *    - n + 1 -> ...10 (chỉ chia hết cho 2)
+     *    - n - 1 → ...00 (chia hết cho 4) → TỐT
+     *    - n + 1 → ...10 (chỉ chia hết cho 2)
      *    => Chọn n - 1
      * 
      * 2. Kết thúc là 11 (n % 4 == 3):
-     *    - n + 1 -> ...00 (chia hết cho 4, nhớ có nhớ bit) -> TỐT HƠN
-     *    - n - 1 -> ...10 (chỉ chia hết cho 2)
+     *    - n + 1 → ...00 (chia hết cho 4, nhớ có nhớ bit) → TỐT HƠN
+     *    - n - 1 → ...10 (chỉ chia hết cho 2)
      *    => Chọn n + 1
      * 
      * NGOẠI LỆ: 
      * - n = 3 (binary 11): 
-     *   - n - 1 -> 2 -> 1 (2 bước)
-     *   - n + 1 -> 4 -> 2 -> 1 (3 bước)
+     *   - n - 1 → 2 → 1 (2 bước)
+     *   - n + 1 → 4 → 2 → 1 (3 bước)
      *   => Với n=3, chọn n - 1 dù nó kết thúc là 11.
      * 
      * BIẾN KIỂM SOÁT:
@@ -369,7 +369,7 @@ public class BitManipulationGuide {
 
         while (num > 1) {
             if ((num & 1) == 0) {
-                // Nếu là số chẵn -> Chia đôi
+                // Nếu là số chẵn → Chia đôi
                 num >>= 1;
             } else {
                 // Nếu là số lẻ
@@ -497,10 +497,10 @@ public class BitManipulationGuide {
 
     // @Test
     void testIntegerReplacement() {
-        assertEquals(3, integerReplacement(8));  // 8 -> 4 -> 2 -> 1
-        assertEquals(4, integerReplacement(7));  // 7 -> 8 -> 4 -> 2 -> 1
-        assertEquals(2, integerReplacement(3));  // 3 -> 2 -> 1 (Exception case)
-        assertEquals(32, integerReplacement(Integer.MAX_VALUE)); // 2147483647 -> +1 overflow logic handled
+        assertEquals(3, integerReplacement(8));  // 8 → 4 → 2 → 1
+        assertEquals(4, integerReplacement(7));  // 7 → 8 → 4 → 2 → 1
+        assertEquals(2, integerReplacement(3));  // 3 → 2 → 1 (Exception case)
+        assertEquals(32, integerReplacement(Integer.MAX_VALUE)); // 2147483647 → +1 overflow logic handled
     }
     // @Test
     void testValidUtf8() {

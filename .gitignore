@@ -2,3 +2,4 @@
 .bloop/
 .metals/
 **/out
+**/.class/**
