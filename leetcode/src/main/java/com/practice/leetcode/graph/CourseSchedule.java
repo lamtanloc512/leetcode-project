@@ -1,5 +1,8 @@
 package com.practice.leetcode.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Problem: Course Schedule
  * Difficulty: Medium
@@ -45,6 +48,43 @@ public class CourseSchedule {
    * @return true if all courses can be finished, false otherwise
    */
   public boolean canFinish(int numCourses, int[][] prerequisites) {
-    throw new UnsupportedOperationException("Implement this method");
+    // Build adjacency list: course -> list of courses that depend on it
+    List<List<Integer>> graph = new ArrayList<>();
+    for (int i = 0; i < numCourses; i++) {
+      graph.add(new ArrayList<>());
+    }
+    
+    for (int[] prereq : prerequisites) {
+      // prereq[1] must be taken before prereq[0]
+      graph.get(prereq[1]).add(prereq[0]);
+    }
+    
+    // State: 0 = unvisited, 1 = visiting (in current path), 2 = visited (processed)
+    int[] state = new int[numCourses];
+    
+    // Check each course for cycles
+    for (int i = 0; i < numCourses; i++) {
+      if (hasCycle(graph, i, state)) {
+        return false;
+      }
+    }
+    
+    return true;
+  }
+  
+  private boolean hasCycle(List<List<Integer>> graph, int course, int[] state) {
+    if (state[course] == 1) return true;  // Found cycle - visiting a node in current path
+    if (state[course] == 2) return false; // Already fully processed
+    
+    state[course] = 1; // Mark as visiting
+    
+    for (int next : graph.get(course)) {
+      if (hasCycle(graph, next, state)) {
+        return true;
+      }
+    }
+    
+    state[course] = 2; // Mark as visited (fully processed)
+    return false;
   }
 }

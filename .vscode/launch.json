@@ -3,6 +3,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "ThreadCountBenchmark",
+      "request": "launch",
+      "mainClass": "com.practice.leetcode.concurrency.ThreadCountBenchmark",
+      "projectName": "leetcode"
+    },
+    {
+      "type": "java",
+      "name": "CsvProcessorSimplified",
+      "request": "launch",
+      "mainClass": "com.practice.leetcode.concurrency.CsvProcessorSimplified",
+      "projectName": "leetcode"
+    },
+    {
+      "type": "java",
+      "name": "CsvBatchProcessor",
+      "request": "launch",
+      "mainClass": "com.practice.leetcode.concurrency.CsvBatchProcessor",
+      "projectName": "leetcode"
+    },
+    {
+      "type": "java",
       "name": "DesignTinyURL",
       "request": "launch",
       "mainClass": "com.practice.leetcode.systemdesign.DesignTinyURL",
