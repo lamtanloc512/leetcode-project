@@ -126,14 +126,30 @@ graph TD
     B -.->|6. Update Order: FAILED| B
 ```
 
-### 8.3. Giải thích chi tiết luồng xử lý lỗi
-1.  **Giao dịch cục bộ 1**: `Order Service` tạo đơn hàng ở trạng thái `PENDING` trong DB của nó.
-2.  **Giao dịch cục bộ 2**: `Order Service` gửi lệnh tới `Inventory Service`. Kho hàng trừ số lượng sản phẩm (giữ chỗ).
-3.  **Giao dịch cục bộ 3 (LỖI)**: `Order Service` gọi `Payment Service`. Giả sử số dư tài khoản không đủ, `Payment Service` trả về kết quả `FAILED`.
-4.  **Kích hoạt Saga Compensation**:
-    *   Vì bước 3 lỗi, `Order Service` nhận thấy cần phải "hoàn tác" các bước đã thành công trước đó.
-    *   Nó gửi một yêu cầu **Compensating Transaction** tới `Inventory Service` để cộng lại số lượng sản phẩm vào kho.
-5.  **Kết thúc**: `Order Service` cập nhật trạng thái đơn hàng thành `FAILED` và thông báo cho người dùng.
+### 8.3. Giải thích chi tiết luồng xử lý lỗi và cơ chế Rollback
+
+Trong Microservices, vì mỗi service có database riêng, chúng ta không thể sử dụng DB Transaction (ACID) thông thường xuyên suốt hệ thống. Thay vào đó, Saga xử lý lỗi theo cơ chế sau:
+
+#### 1. Luồng xử lý chi tiết:
+1.  **Giao dịch cục bộ 1 (Order Service):** Tạo đơn hàng ở trạng thái `PENDING` trong DB của nó. Transaction này đã commit.
+2.  **Giao dịch cục bộ 2 (Inventory Service):** Nhận lệnh từ Order Service và thực hiện trừ kho (giữ chỗ). Transaction này cũng đã commit tại DB của Inventory.
+3.  **Giao dịch cục bộ 3 (Payment Service - LỖI):** Khi xử lý thanh toán, giả sử số dư không đủ, nó trả về kết quả `FAILED`.
+
+#### 2. Làm sao các service biết khi có lỗi xảy ra?
+Có hai cách tiếp cận chính để các service phối hợp xử lý lỗi:
+*   **Điều phối (Orchestration - Cách tiếp cận "Quản lý"):** `Order Service` đóng vai trò là bộ não điều phối. Khi thấy Payment lỗi, nó chủ động gửi lệnh "Giao dịch bù" tới các service trước đó (Inventory).
+*   **Vũ đạo (Choreography - Cách tiếp cận "Sự kiện"):** Các service giao tiếp qua Message Broker (Kafka/RabbitMQ). Khi `Payment Service` đẩy sự kiện `PaymentFailed`, `Inventory Service` (đang lắng nghe) sẽ tự biết mình cần phải cộng lại kho.
+
+#### 3. Cơ chế "Giao dịch bù" (Compensating Transactions):
+Vì dữ liệu đã được commit vào DB của từng service, chúng ta không thể "rollback" theo kiểu truyền thống. Chúng ta phải thực hiện một giao dịch mới để đảo ngược logic:
+
+| Hành động gốc (Original Action) | Hành động bù (Rollback Action) |
+| :--- | :--- |
+| **Order:** Tạo bản ghi `PENDING` | Cập nhật trạng thái thành `CANCELLED` hoặc `FAILED` |
+| **Inventory:** Trừ số lượng hàng | Cộng lại số lượng hàng vào kho |
+| **Payment:** Trừ tiền khách hàng | Thực hiện lệnh hoàn tiền (Refund) |
+
+Hệ thống sẽ đạt trạng thái **Nhất quán cuối cùng (Eventual Consistency)** ngay sau khi tất cả các giao dịch bù này hoàn thành thành công.
 
 ### 8.4. Tại sao làm vậy mà không dùng 2PC?
 *   **Tính sẵn sàng (Availability)**: Nếu `Payment Service` bị chậm, `Inventory Service` vẫn có thể xử lý các đơn hàng khác sau khi đã thực hiện giao dịch cục bộ. Hệ thống không bị "treo" toàn bộ.
