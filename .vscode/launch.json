@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "BacktrackingExercises",
+      "request": "launch",
+      "mainClass": "com.practice.leetcode.backtracking.BacktrackingExercises",
+      "projectName": "leetcode"
+    },
+    {
+      "type": "java",
       "name": "ThreadCountBenchmark",
       "request": "launch",
       "mainClass": "com.practice.leetcode.concurrency.ThreadCountBenchmark",
