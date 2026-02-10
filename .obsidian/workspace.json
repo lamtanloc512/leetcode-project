@@ -1,0 +1,229 @@
+{
+  "main": {
+    "id": "0f0321138528966a",
+    "type": "split",
+    "children": [
+      {
+        "id": "2e7dab4159880a8c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d414e2dfd29a1866",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "analytics/java-core/cheatsheet.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "cheatsheet"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "208f6ab646df9867",
+    "type": "split",
+    "children": [
+      {
+        "id": "ed3079830e182dd4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bf81240b23cf724e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "a71777ec53ee4c47",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f430bfa06bea3feb",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "07162cb81c5bac62",
+    "type": "split",
+    "children": [
+      {
+        "id": "5e20cebde415ba3f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "11083e696b58720d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "analytics/java-core/jvm-architecture.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for jvm-architecture"
+            }
+          },
+          {
+            "id": "28a61567b58250e6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "analytics/java-core/jvm-architecture.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from jvm-architecture"
+            }
+          },
+          {
+            "id": "73a1a608803351fd",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "6da59c1a53bea829",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "38365bc6e8f9a671",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "analytics/java-core/cheatsheet.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of cheatsheet"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "templater-obsidian:Templater": false,
+      "terminal:Open terminal": false
+    }
+  },
+  "active": "d414e2dfd29a1866",
+  "lastOpenFiles": [
+    "java_backend_study_guide.md",
+    "analytics/spring/transaction-management.md",
+    "analytics/_index.md",
+    "analytics/concurrency/thread-pools-locks.md",
+    "analytics/leetcode-cheatsheet.md",
+    "analytics/java-core/cheatsheet.md",
+    "analytics/java-core/memory-model.md",
+    "analytics/java-core/exceptions-errors.md",
+    "WorldQuant/476277262_122195969780185343_5887820812156534707_n.jpg",
+    "WorldQuant/476356647_122195970518185343_820215260392203528_n.jpg",
+    "analytics/microservices/microservices-architecture.md",
+    "analytics/java-core/jvm-architecture.md",
+    "analytics/java-core/synchronized-internals.md",
+    "analytics/java-core/serialization.md",
+    "analytics/microservices-edge-cases-expert-guide.md",
+    "analytics/persistence/sap-job-matching.md",
+    "analytics/persistence/batch-processing.md",
+    "analytics/microservices/microservices-edge-cases-expert-guide.md",
+    "analytics/microservices/microservices-patterns-deep-dive.md",
+    "analytics/persistence/persistence-performance.md",
+    "analytics/persistence/jpa-hibernate-advanced-case-studies.md",
+    "analytics/spring/spring-expert-guide.md",
+    "analytics/spring/dependency-injection.md",
+    "analytics/microservices",
+    "analytics/persistence",
+    "analytics/spring",
+    "analytics/concurrency",
+    "analytics/java-core",
+    "analytics/microservices-patterns-deep-dive.md",
+    "leetcode/target/test-classes/com/practice/leetcode/twopointers/TwoSumSortedSolutionTest.class",
+    "leetcode/target/test-classes/com/practice/leetcode/twopointers/TwoSumSortedSolutionTest$ImperativeTests.class",
+    "leetcode/target/test-classes/com/practice/leetcode/twopointers/TwoSumSortedSolutionTest$FunctionalTests.class",
+    "leetcode/target/test-classes/com/practice/leetcode/twopointers/TwoSumSortedSolutionTest$FunctionalSolution.class",
+    "leetcode/target/test-classes/com/practice/leetcode/twopointers/TwoSumSortedSolutionTest$ImperativeSolution.class",
+    "analytics/microservices-architecture.md",
+    "analytics/dependency-injection.md"
+  ]
+}

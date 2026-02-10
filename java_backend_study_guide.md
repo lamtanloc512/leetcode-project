@@ -6,16 +6,16 @@
 
 ## 📋 Checklist Tổng Quan
 
-| Chủ đề | Mức độ ưu tiên | Status |
-|--------|---------------|--------|
-| Java Core & JVM | 🔴 Critical | ⬜ |
-| Concurrency & Multithreading | 🔴 Critical | ⬜ |
-| SQL & MySQL | 🔴 Critical | ⬜ |
-| Redis & NoSQL | 🟡 Important | ⬜ |
-| HTTP & RESTful API | 🔴 Critical | ⬜ |
-| Kubernetes & Docker | 🟡 Important | ⬜ |
-| AWS & Cloud | 🟢 Nice to have | ⬜ |
-| System Design | 🟡 Important | ⬜ |
+| Chủ đề                       | Mức độ ưu tiên  | Status |
+| ---------------------------- | --------------- | ------ |
+| Java Core & JVM              | 🔴 Critical     | ⬜      |
+| Concurrency & Multithreading | 🔴 Critical     | ⬜      |
+| SQL & MySQL                  | 🔴 Critical     | ⬜      |
+| Redis & NoSQL                | 🟡 Important    | ⬜      |
+| HTTP & RESTful API           | 🔴 Critical     | ⬜      |
+| Kubernetes & Docker          | 🟡 Important    | ⬜      |
+| AWS & Cloud                  | 🟢 Nice to have | ⬜      |
+| System Design                | 🟡 Important    | ⬜      |
 
 ---
 
